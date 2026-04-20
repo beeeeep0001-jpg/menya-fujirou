@@ -10,7 +10,7 @@
   "rankings": [
     {
       "keyword": "恵比寿 ホテル おすすめ",
-      "rank": "9",
+      "rank": "8",
       "total": 20
     },
     {
@@ -20,8 +20,8 @@
     },
     {
       "keyword": "恵比寿 サービスアパートメント",
-      "rank": "21位以下",
-      "total": 1
+      "rank": "エラー",
+      "error": "400 Client Error: Bad Request for url: https://places.googleapis.com/v1/places:searchText"
     },
     {
       "keyword": "恵比寿 長期滞在 ホテル",
@@ -46,7 +46,7 @@
   ],
   "summary": {
     "best_rank": 1,
-    "worst_rank": 9,
+    "worst_rank": 8,
     "top3_count": 1,
     "top10_count": 4
   }
