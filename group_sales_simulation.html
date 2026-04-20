@@ -4,319 +4,336 @@
 <meta charset="UTF-8">
 <title>グループ売上シミュレーション 2026〜2028</title>
 <style>
-@page{size:A4 portrait;margin:0;}
+@page{size:297mm 210mm;margin:6mm;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Noto Sans JP','Hiragino Kaku Gothic Pro',sans-serif;color:#1a1a2e;}
 
-.page{width:210mm;height:297mm;background:#fff;overflow:hidden;page-break-after:always;break-after:page;position:relative;}
+.page{width:285mm;height:198mm;background:#fff;overflow:hidden;page-break-after:always;break-after:page;position:relative;}
 
-/* ========== ヘッダー ========== */
-.page-header{background:linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%);color:#fff;padding:18px 28px 14px;}
-.page-header-title{font-size:18px;font-weight:900;letter-spacing:2px;}
-.page-header-sub{font-size:10px;color:rgba(255,255,255,0.6);margin-top:3px;letter-spacing:1px;}
-.page-header-badge{display:inline-block;background:#e94560;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:2px;margin-top:6px;}
+/* ヘッダー */
+.page-header{background:linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%);color:#fff;padding:10px 20px 8px;display:flex;align-items:center;gap:16px;}
+.page-header-title{font-size:15px;font-weight:900;letter-spacing:2px;}
+.page-header-sub{font-size:9px;color:rgba(255,255,255,0.6);margin-top:2px;}
+.page-header-badge{margin-left:auto;background:#e94560;color:#fff;font-size:9px;font-weight:700;padding:2px 10px;border-radius:2px;white-space:nowrap;}
 
-/* ========== 年度セクション ========== */
-.year-section{margin:0 18px 12px;}
-.year-header{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:4px 4px 0 0;margin-top:12px;}
+/* 2列レイアウト */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:8px 10px 0;}
+.one-col{padding:8px 10px 0;}
+
+/* 年度セクション */
+.year-section{}
+.year-header{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:3px 3px 0 0;}
 .year-header.y2026{background:#e94560;}
 .year-header.y2027{background:#c0392b;}
 .year-header.y2028{background:#7c3aed;}
-.year-title{color:#fff;font-size:15px;font-weight:900;}
-.year-goal{color:rgba(255,255,255,0.8);font-size:10px;margin-left:auto;}
-.year-total-badge{background:rgba(255,255,255,0.25);color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;white-space:nowrap;}
+.year-title{color:#fff;font-size:13px;font-weight:900;}
+.year-goal{color:rgba(255,255,255,0.8);font-size:9px;}
+.year-total-badge{background:rgba(255,255,255,0.25);color:#fff;font-size:10px;font-weight:700;padding:1px 8px;border-radius:20px;white-space:nowrap;margin-left:auto;}
 
-.year-body{border:1px solid #e0e0e0;border-top:none;border-radius:0 0 4px 4px;overflow:hidden;}
+.year-body{border:1px solid #ddd;border-top:none;border-radius:0 0 3px 3px;}
 
 /* グループラベル */
-.group-label{background:#f0f2f5;border-bottom:1px solid #e0e0e0;padding:5px 14px;font-size:11px;font-weight:700;color:#1a1a2e;letter-spacing:1px;display:flex;align-items:center;gap:6px;}
-.group-dot{width:9px;height:9px;border-radius:50%;}
+.group-label{background:#f0f2f5;border-bottom:1px solid #e0e0e0;padding:4px 12px;font-size:10px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:5px;}
+.group-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .dot-orange{background:#f59e0b;}
 .dot-blue{background:#0f3460;}
 .dot-red{background:#e94560;}
 
 /* 明細行 */
-.detail-row{display:flex;align-items:center;padding:5px 14px;border-bottom:1px solid #f5f5f5;}
+.detail-row{display:flex;align-items:center;padding:4px 12px;border-bottom:1px solid #f5f5f5;}
 .detail-row:last-child{border-bottom:none;}
-.detail-name{font-size:13px;color:#444;flex:1;}
-.detail-name.indent{padding-left:10px;color:#555;}
-.detail-amount{font-size:14px;font-weight:700;color:#1a1a2e;text-align:right;white-space:nowrap;}
-.detail-amount.highlight{color:#e94560;}
+.detail-name{font-size:12px;color:#444;flex:1;}
+.detail-name.indent{padding-left:8px;color:#555;}
+.detail-amount{font-size:13px;font-weight:700;color:#1a1a2e;text-align:right;white-space:nowrap;}
+.detail-amount.red{color:#e94560;}
 .detail-amount.purple{color:#7c3aed;}
 
 /* 月別バー */
-.monthly-section{padding:8px 14px;background:#fafafa;border-top:1px solid #eee;}
-.monthly-title{font-size:9px;color:#888;margin-bottom:6px;font-weight:700;}
-.monthly-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;}
+.monthly-wrap{padding:6px 12px 8px;background:#fafafa;border-top:1px solid #eee;}
+.monthly-title{font-size:8px;color:#888;margin-bottom:4px;font-weight:700;}
+.monthly-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;}
 .monthly-col{text-align:center;}
-.monthly-month{font-size:8px;color:#888;margin-bottom:2px;}
-.monthly-bar-wrap{height:32px;display:flex;align-items:flex-end;justify-content:center;}
-.monthly-bar{width:14px;border-radius:2px 2px 0 0;background:#e94560;}
-.monthly-val{font-size:7.5px;color:#444;font-weight:700;margin-top:2px;}
+.monthly-month{font-size:7px;color:#888;margin-bottom:2px;}
+.monthly-bar-wrap{height:24px;display:flex;align-items:flex-end;justify-content:center;}
+.monthly-bar{width:12px;border-radius:2px 2px 0 0;background:#e94560;}
+.monthly-val{font-size:7px;color:#444;font-weight:700;margin-top:1px;}
 
-/* 小計・合計 */
-.subtotal-row{display:flex;align-items:center;padding:5px 14px;background:#f8f0ff;border-top:1px solid #e0e0e0;}
-.subtotal-label{font-size:10px;color:#7c3aed;flex:1;font-weight:700;}
-.subtotal-val{font-size:13px;font-weight:900;color:#7c3aed;}
-
-.result-row{display:flex;align-items:center;padding:8px 14px;border-top:2px solid;gap:10px;}
+/* 合計行 */
+.result-row{display:flex;align-items:center;padding:6px 12px;border-top:2px solid;}
 .result-row.y2026{border-color:#e94560;background:#fff5f6;}
 .result-row.y2027{border-color:#c0392b;background:#fff5f6;}
 .result-row.y2028{border-color:#7c3aed;background:#faf5ff;}
-.result-label{font-size:13px;font-weight:700;flex:1;}
-.result-total{font-size:22px;font-weight:900;}
+.result-label{font-size:11px;font-weight:700;flex:1;}
+.result-total{font-size:18px;font-weight:900;}
 .result-total.y2026{color:#e94560;}
 .result-total.y2027{color:#c0392b;}
 .result-total.y2028{color:#7c3aed;}
-.result-diff{font-size:10px;font-weight:700;background:#1a1a2e;color:#fbbf24;padding:3px 10px;border-radius:20px;}
-.result-diff.good{background:#10b981;}
-.result-diff.warn{background:#f59e0b;}
+.result-diff{font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;color:#fff;white-space:nowrap;margin-left:6px;}
+.diff-good{background:#10b981;}
+.diff-warn{background:#f59e0b;}
 
-/* ========== P2 サマリー表 ========== */
-.summary-section{margin:16px 18px 0;}
-.summary-title{font-size:13px;font-weight:900;color:#1a1a2e;border-left:4px solid #e94560;padding-left:10px;margin-bottom:10px;}
+/* P2 サマリー */
+.summary-wrap{padding:0 10px;margin-top:8px;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.summary-title{font-size:12px;font-weight:900;color:#1a1a2e;border-left:3px solid #e94560;padding-left:8px;margin-bottom:6px;}
 .summary-table{width:100%;border-collapse:collapse;font-size:11px;}
-.summary-table th{background:#1a1a2e;color:#fff;padding:9px 12px;text-align:center;font-weight:700;font-size:12px;}
-.summary-table td{padding:10px 12px;border-bottom:1px solid #eee;text-align:center;font-size:12px;}
-.summary-table tr:last-child td{border-bottom:none;}
+.summary-table th{background:#1a1a2e;color:#fff;padding:7px 10px;text-align:center;font-weight:700;}
+.summary-table td{padding:8px 10px;border-bottom:1px solid #eee;text-align:center;}
 .summary-table tr:nth-child(2) td{background:#fff5f6;}
 .summary-table tr:nth-child(3) td{background:#f0f7ff;}
 .summary-table tr:nth-child(4) td{background:#faf5ff;}
 .s-year{font-weight:700;font-size:12px;}
-.s-total{font-size:16px;font-weight:900;}
+.s-total{font-size:15px;font-weight:900;}
 .s-total.y2026{color:#e94560;}
 .s-total.y2027{color:#c0392b;}
 .s-total.y2028{color:#7c3aed;}
-.s-goal{font-size:12px;font-weight:700;color:#1a1a2e;}
 .badge-good{display:inline-block;background:#10b981;color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;}
 .badge-warn{display:inline-block;background:#f59e0b;color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;}
-.badge-dash{color:#ccc;}
 
-/* ポイントボックス */
-.point-box{margin:12px 18px 0;background:linear-gradient(135deg,#1a1a2e,#0f3460);border-radius:6px;padding:14px 18px;color:#fff;}
-.point-title{font-size:11px;font-weight:700;color:#fbbf24;margin-bottom:8px;}
-.point-item{font-size:11px;color:rgba(255,255,255,0.85);line-height:1.8;padding-left:12px;position:relative;}
-.point-item::before{content:'▶';position:absolute;left:0;color:#e94560;font-size:8px;}
+/* ポイント */
+.point-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border-radius:5px;padding:10px 14px;color:#fff;}
+.point-title{font-size:11px;font-weight:700;color:#fbbf24;margin-bottom:6px;}
+.point-item{font-size:10px;color:rgba(255,255,255,0.85);line-height:1.8;padding-left:10px;position:relative;}
+.point-item::before{content:'▶';position:absolute;left:0;color:#e94560;font-size:7px;top:3px;}
+.note-text{margin-top:8px;font-size:8px;color:#999;line-height:1.7;padding:0 10px;}
 
-.note{margin:10px 18px 0;font-size:9px;color:#999;line-height:1.7;}
-
-.footer{position:absolute;bottom:0;left:0;right:0;background:#1a1a2e;color:#666;text-align:center;padding:7px;font-size:9px;letter-spacing:1px;}
+.footer{position:absolute;bottom:0;left:0;right:0;background:#1a1a2e;color:#666;text-align:center;padding:5px;font-size:8px;}
 </style>
 </head>
 <body>
 
-<!-- ============================================================ PAGE 1 ============================================================ -->
+<!-- ==================== PAGE 1 ==================== -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">グループ売上シミュレーション　完全版</div>
-    <div class="page-header-sub">フォレストルーフ × ダブワークス × AIWEBマーケ　2026〜2028</div>
+    <div>
+      <div class="page-header-title">グループ売上シミュレーション　完全版</div>
+      <div class="page-header-sub">フォレストルーフ × ダブワークス × AIWEBマーケ　2026〜2028年</div>
+    </div>
     <div class="page-header-badge">2026年4月 作成</div>
   </div>
 
-  <!-- 2026年 -->
-  <div class="year-section">
-    <div class="year-header y2026">
-      <div class="year-title">2026年度　今期予想</div>
-      <div class="year-goal">現在進行中</div>
-      <div class="year-total-badge">合計 約3億4,900万円</div>
-    </div>
-    <div class="year-body">
-      <div class="group-label"><span class="group-dot dot-orange"></span>フォレストルーフ（飲食＋介護）</div>
-      <div class="detail-row">
-        <div class="detail-name">飲食・介護事業　合計</div>
-        <div class="detail-amount highlight">1億5,000万円</div>
+  <div class="two-col">
+
+    <!-- 2026年 -->
+    <div class="year-section">
+      <div class="year-header y2026">
+        <div class="year-title">2026年度　今期予想</div>
+        <div class="year-total-badge">合計 約3億4,900万円</div>
       </div>
-      <div class="group-label"><span class="group-dot dot-blue"></span>ダブワークス（みや寺 2店舗）</div>
-      <div class="detail-row">
-        <div class="detail-name">みや寺 2店舗　合計</div>
-        <div class="detail-amount highlight">1億2,500万円</div>
-      </div>
-      <div class="group-label"><span class="group-dot dot-red"></span>AIWEBマーケ（4月〜12月 9ヶ月累計）</div>
-      <div class="detail-row">
-        <div class="detail-name">ストック収入累積　合計</div>
-        <div class="detail-amount highlight">7,400万円</div>
-      </div>
-      <div class="monthly-section">
-        <div class="monthly-title">AIWEBマーケ　月別売上推移　（12月末ストック：1,000万円/月）</div>
-        <div class="monthly-grid">
-          <div class="monthly-col"><div class="monthly-month">4月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:11px;"></div></div><div class="monthly-val">350万</div></div>
-          <div class="monthly-col"><div class="monthly-month">5月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:18px;"></div></div><div class="monthly-val">596万</div></div>
-          <div class="monthly-col"><div class="monthly-month">6月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:21px;"></div></div><div class="monthly-val">678万</div></div>
-          <div class="monthly-col"><div class="monthly-month">7月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:23px;"></div></div><div class="monthly-val">760万</div></div>
-          <div class="monthly-col"><div class="monthly-month">8月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:26px;"></div></div><div class="monthly-val">842万</div></div>
-          <div class="monthly-col"><div class="monthly-month">9月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:28px;"></div></div><div class="monthly-val">924万</div></div>
-          <div class="monthly-col"><div class="monthly-month">10月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:30px;"></div></div><div class="monthly-val">1,006万</div></div>
-          <div class="monthly-col"><div class="monthly-month">11月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:32px;"></div></div><div class="monthly-val">1,088万</div></div>
-          <div class="monthly-col"><div class="monthly-month">12月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:32px;background:#c0392b;"></div></div><div class="monthly-val" style="font-weight:900;color:#c0392b;">1,152万</div></div>
+      <div class="year-body">
+        <div class="group-label"><span class="group-dot dot-orange"></span>フォレストルーフ（飲食＋介護）</div>
+        <div class="detail-row">
+          <div class="detail-name">飲食・介護事業　合計</div>
+          <div class="detail-amount red">1億5,000万円</div>
+        </div>
+        <div class="group-label"><span class="group-dot dot-blue"></span>ダブワークス（みや寺 2店舗）</div>
+        <div class="detail-row">
+          <div class="detail-name">みや寺 2店舗　合計</div>
+          <div class="detail-amount red">1億2,500万円</div>
+        </div>
+        <div class="group-label"><span class="group-dot dot-red"></span>AIWEBマーケ（4〜12月 累計）</div>
+        <div class="detail-row">
+          <div class="detail-name">ストック収入累積</div>
+          <div class="detail-amount red">7,400万円</div>
+        </div>
+        <div class="monthly-wrap">
+          <div class="monthly-title">月別推移（12月末ストック：1,000万円/月）</div>
+          <div class="monthly-grid">
+            <div class="monthly-col"><div class="monthly-month">4月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:8px;"></div></div><div class="monthly-val">350万</div></div>
+            <div class="monthly-col"><div class="monthly-month">5月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:12px;"></div></div><div class="monthly-val">596万</div></div>
+            <div class="monthly-col"><div class="monthly-month">6月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:14px;"></div></div><div class="monthly-val">678万</div></div>
+            <div class="monthly-col"><div class="monthly-month">7月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:16px;"></div></div><div class="monthly-val">760万</div></div>
+            <div class="monthly-col"><div class="monthly-month">8月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:18px;"></div></div><div class="monthly-val">842万</div></div>
+            <div class="monthly-col"><div class="monthly-month">9月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:20px;"></div></div><div class="monthly-val">924万</div></div>
+            <div class="monthly-col"><div class="monthly-month">10月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:21px;"></div></div><div class="monthly-val">1,006万</div></div>
+            <div class="monthly-col"><div class="monthly-month">11月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:23px;"></div></div><div class="monthly-val">1,088万</div></div>
+            <div class="monthly-col"><div class="monthly-month">12月</div><div class="monthly-bar-wrap"><div class="monthly-bar" style="height:24px;background:#c0392b;"></div></div><div class="monthly-val" style="color:#c0392b;font-weight:900;">1,152万</div></div>
+          </div>
+        </div>
+        <div class="result-row y2026">
+          <div class="result-label">グループ合計</div>
+          <div class="result-total y2026">3億4,900万円</div>
         </div>
       </div>
-      <div class="result-row y2026">
-        <div class="result-label">グループ合計</div>
-        <div class="result-total y2026">3億4,900万円</div>
-      </div>
     </div>
-  </div>
 
-  <!-- 2027年 -->
-  <div class="year-section">
-    <div class="year-header y2027">
-      <div class="year-title">2027年度　来年予想</div>
-      <div class="year-goal">目標：6億円</div>
-      <div class="year-total-badge">合計 約7億250万円</div>
+    <!-- 2027年 -->
+    <div class="year-section">
+      <div class="year-header y2027">
+        <div class="year-title">2027年度　来年予想</div>
+        <div class="year-goal">目標：6億円</div>
+        <div class="year-total-badge">合計 約7億250万円</div>
+      </div>
+      <div class="year-body">
+        <div class="group-label"><span class="group-dot dot-orange"></span>フォレストルーフ</div>
+        <div class="detail-row">
+          <div class="detail-name indent">麺屋 海心</div>
+          <div class="detail-amount">1億200万円</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-name indent">麺屋 藤ろう</div>
+          <div class="detail-amount">6,840万円</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-name indent">介護（2店舗）</div>
+          <div class="detail-amount">1億円</div>
+        </div>
+        <div class="group-label"><span class="group-dot dot-blue"></span>ダブワークス</div>
+        <div class="detail-row">
+          <div class="detail-name indent">みや寺 大手町</div>
+          <div class="detail-amount">8,400万円</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-name indent">みや寺 祇園</div>
+          <div class="detail-amount">6,960万円</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-name indent">鉄板焼き（通年）</div>
+          <div class="detail-amount">6,600万円</div>
+        </div>
+        <div class="group-label"><span class="group-dot dot-red"></span>AIWEBマーケ</div>
+        <div class="detail-row">
+          <div class="detail-name indent">月額ストック（平均1,500万×12）</div>
+          <div class="detail-amount red">1億8,000万円</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-name indent">初期費用（500件×4万）</div>
+          <div class="detail-amount red">2,000万円</div>
+        </div>
+        <div class="result-row y2027">
+          <div class="result-label">グループ合計</div>
+          <div class="result-total y2027">7億250万円</div>
+          <div class="result-diff diff-good">＋約1億の余裕</div>
+        </div>
+      </div>
     </div>
-    <div class="year-body">
-      <div class="group-label"><span class="group-dot dot-orange"></span>フォレストルーフ</div>
-      <div class="detail-row">
-        <div class="detail-name indent">麺屋 海心</div>
-        <div class="detail-amount">1億200万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">麺屋 藤ろう</div>
-        <div class="detail-amount">6,840万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">介護（2店舗）</div>
-        <div class="detail-amount">1億円</div>
-      </div>
-      <div class="group-label"><span class="group-dot dot-blue"></span>ダブワークス</div>
-      <div class="detail-row">
-        <div class="detail-name indent">みや寺 大手町</div>
-        <div class="detail-amount">8,400万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">みや寺 祇園</div>
-        <div class="detail-amount">6,960万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">鉄板焼き（通年）</div>
-        <div class="detail-amount">6,600万円</div>
-      </div>
-      <div class="group-label"><span class="group-dot dot-red"></span>AIWEBマーケ</div>
-      <div class="detail-row">
-        <div class="detail-name indent">月額ストック収入（平均1,500万×12ヶ月）</div>
-        <div class="detail-amount highlight">1億8,000万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">初期費用（500件×4万円）</div>
-        <div class="detail-amount highlight">2,000万円</div>
-      </div>
-      <div class="result-row y2027">
-        <div class="result-label">グループ合計</div>
-        <div class="result-total y2027">7億250万円</div>
-        <div class="result-diff good">目標6億に対して ＋約1億の余裕</div>
-      </div>
-    </div>
-  </div>
+
+  </div><!-- /two-col -->
 
   <div class="footer">株式会社グループ　売上シミュレーション 2026〜2028　｜　1 / 2</div>
 </div>
 
 
-<!-- ============================================================ PAGE 2 ============================================================ -->
+<!-- ==================== PAGE 2 ==================== -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">グループ売上シミュレーション　完全版</div>
-    <div class="page-header-sub">フォレストルーフ × ダブワークス × AIWEBマーケ　2026〜2028</div>
+    <div>
+      <div class="page-header-title">グループ売上シミュレーション　完全版</div>
+      <div class="page-header-sub">フォレストルーフ × ダブワークス × AIWEBマーケ　2026〜2028年</div>
+    </div>
     <div class="page-header-badge">2026年4月 作成</div>
   </div>
 
-  <!-- 2028年 -->
-  <div class="year-section">
-    <div class="year-header y2028">
-      <div class="year-title">2028年度　再来年予想</div>
-      <div class="year-goal">目標：10億円</div>
-      <div class="year-total-badge">合計 約9億5,600万円</div>
+  <!-- 2028年（全幅） -->
+  <div class="one-col">
+    <div class="year-section">
+      <div class="year-header y2028">
+        <div class="year-title">2028年度　再来年予想</div>
+        <div class="year-goal">目標：10億円</div>
+        <div class="year-total-badge">合計 約9億5,600万円</div>
+      </div>
+      <div class="year-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid #eee;">
+          <!-- フォレストルーフ -->
+          <div style="border-right:1px solid #eee;">
+            <div class="group-label"><span class="group-dot dot-orange"></span>フォレストルーフ</div>
+            <div class="detail-row">
+              <div class="detail-name indent">麺屋 海心</div>
+              <div class="detail-amount">1億2,000万円</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-name indent">麺屋 藤ろう</div>
+              <div class="detail-amount">8,400万円</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-name indent">介護（2店舗）</div>
+              <div class="detail-amount">1億円</div>
+            </div>
+          </div>
+          <!-- ダブワークス -->
+          <div style="border-right:1px solid #eee;">
+            <div class="group-label"><span class="group-dot dot-blue"></span>ダブワークス</div>
+            <div class="detail-row">
+              <div class="detail-name indent">みや寺 大手町</div>
+              <div class="detail-amount">9,600万円</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-name indent">みや寺 祇園</div>
+              <div class="detail-amount">8,400万円</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-name indent">鉄板焼き</div>
+              <div class="detail-amount">7,200万円</div>
+            </div>
+          </div>
+          <!-- AIWEBマーケ -->
+          <div>
+            <div class="group-label"><span class="group-dot dot-red"></span>AIWEBマーケ</div>
+            <div class="detail-row">
+              <div class="detail-name indent">月額ストック（平均3,000万×12）</div>
+              <div class="detail-amount purple">3億6,000万円</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-name indent">初期費用（1,000件×4万）</div>
+              <div class="detail-amount purple">4,000万円</div>
+            </div>
+          </div>
+        </div>
+        <div class="result-row y2028">
+          <div class="result-label">グループ合計</div>
+          <div class="result-total y2028">9億5,600万円</div>
+          <div class="result-diff diff-warn">目標まであと▲4,400万（射程圏内）</div>
+        </div>
+      </div>
     </div>
-    <div class="year-body">
-      <div class="group-label"><span class="group-dot dot-orange"></span>フォレストルーフ</div>
-      <div class="detail-row">
-        <div class="detail-name indent">麺屋 海心</div>
-        <div class="detail-amount">1億2,000万円</div>
+  </div>
+
+  <!-- サマリー ＋ ポイント -->
+  <div class="summary-wrap" style="margin-top:10px;">
+    <div class="summary-grid">
+      <div>
+        <div class="summary-title">年度別　達成見込みサマリー</div>
+        <table class="summary-table">
+          <tr>
+            <th>年度</th><th>グループ予想合計</th><th>年間目標</th><th>差額・評価</th>
+          </tr>
+          <tr>
+            <td class="s-year">2026年</td>
+            <td><span class="s-total y2026">3億4,900万円</span></td>
+            <td style="color:#ccc;">―</td>
+            <td style="color:#888;font-size:10px;">基盤構築フェーズ</td>
+          </tr>
+          <tr>
+            <td class="s-year">2027年</td>
+            <td><span class="s-total y2027">7億250万円</span></td>
+            <td style="font-weight:700;">6億円</td>
+            <td><span class="badge-good">＋約1億　達成見込み</span></td>
+          </tr>
+          <tr>
+            <td class="s-year">2028年</td>
+            <td><span class="s-total y2028">9億5,600万円</span></td>
+            <td style="font-weight:700;">10億円</td>
+            <td><span class="badge-warn">▲4,400万　射程圏内</span></td>
+          </tr>
+        </table>
       </div>
-      <div class="detail-row">
-        <div class="detail-name indent">麺屋 藤ろう</div>
-        <div class="detail-amount">8,400万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">介護（2店舗）</div>
-        <div class="detail-amount">1億円</div>
-      </div>
-      <div class="group-label"><span class="group-dot dot-blue"></span>ダブワークス</div>
-      <div class="detail-row">
-        <div class="detail-name indent">みや寺 大手町</div>
-        <div class="detail-amount">9,600万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">みや寺 祇園</div>
-        <div class="detail-amount">8,400万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">鉄板焼き</div>
-        <div class="detail-amount">7,200万円</div>
-      </div>
-      <div class="group-label"><span class="group-dot dot-red"></span>AIWEBマーケ</div>
-      <div class="detail-row">
-        <div class="detail-name indent">月額ストック収入（平均3,000万×12ヶ月）</div>
-        <div class="detail-amount purple">3億6,000万円</div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-name indent">初期費用（1,000件×4万円）</div>
-        <div class="detail-amount purple">4,000万円</div>
-      </div>
-      <div class="result-row y2028">
-        <div class="result-label">グループ合計</div>
-        <div class="result-total y2028">9億5,600万円</div>
-        <div class="result-diff warn">目標まであと▲4,400万（射程圏内）</div>
+      <div>
+        <div class="summary-title">2028年　10億達成へのカバーシナリオ</div>
+        <div class="point-box">
+          <div class="point-item">介護3店舗目の出店で数千万円の上積みが可能</div>
+          <div class="point-item">AIWEBマーケの月額単価上振れ・件数超過でカバー</div>
+          <div class="point-item">鉄板焼き・みや寺の客単価向上で上積み</div>
+          <div class="point-item" style="margin-top:6px;color:#fbbf24;">3つの上振れシナリオで十分射程圏内</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- サマリー表 -->
-  <div class="summary-section">
-    <div class="summary-title">年度別　達成見込みサマリー</div>
-    <table class="summary-table">
-      <tr>
-        <th>年度</th>
-        <th>グループ予想合計</th>
-        <th>年間目標</th>
-        <th>差額・評価</th>
-      </tr>
-      <tr>
-        <td class="s-year">2026年</td>
-        <td><span class="s-total y2026">3億4,900万円</span></td>
-        <td class="badge-dash">―</td>
-        <td class="badge-dash">基盤構築フェーズ</td>
-      </tr>
-      <tr>
-        <td class="s-year">2027年</td>
-        <td><span class="s-total y2027">7億250万円</span></td>
-        <td class="s-goal">6億円</td>
-        <td><span class="badge-good">＋約1億　達成見込み</span></td>
-      </tr>
-      <tr>
-        <td class="s-year">2028年</td>
-        <td><span class="s-total y2028">9億5,600万円</span></td>
-        <td class="s-goal">10億円</td>
-        <td><span class="badge-warn">▲4,400万　射程圏内</span></td>
-      </tr>
-    </table>
+  <div class="note-text">
+    ※AIWEBマーケは月額2万円×件数＋初期4万円×新規件数で計算　／　※鉄板焼きは2027年通年稼働で試算　／　※介護は2店舗固定（3店舗目は上振れシナリオ）
   </div>
 
-  <!-- ポイントボックス -->
-  <div class="point-box">
-    <div class="point-title">2028年 10億達成へのカバーシナリオ</div>
-    <div class="point-item">介護3店舗目の出店（+数千万円）でギャップ解消可能</div>
-    <div class="point-item">AIWEBマーケの月額単価上振れ・件数超過でカバー</div>
-    <div class="point-item">鉄板焼き・みや寺の客単価向上で上積み</div>
-    <div class="point-item">AIWEBマーケは月額2万円×件数＋初期4万円×新規件数で試算</div>
-  </div>
-
-  <div class="note">
-    ※鉄板焼きは2027年通年稼働で試算　／　※介護は2店舗固定で試算（3店舗目は上振れシナリオ）<br>
-    ※AIWEBマーケは月額ストック収入（既存継続）＋初期費用（新規獲得）の合算
-  </div>
-
-  <div class="footer">株式会社グループ　売上シミュレーション 2026〜2028　｜　2 / 2</div>
+  <div class="footer">株式会社グループ　売上シミュレーション 2026〜2028　｜　2 / 2　｜　目標：2028年グループ10億円達成</div>
 </div>
 
 </body>
