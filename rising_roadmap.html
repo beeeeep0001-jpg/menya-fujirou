@@ -4,91 +4,73 @@
 <meta charset="UTF-8">
 <title>株式会社ライジング 事業ロードマップ</title>
 <style>
-@page{size:A4 landscape;margin:5mm;}
+@page{size:297mm 210mm;margin:6mm;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans JP','Hiragino Kaku Gothic Pro',sans-serif;background:#f0f2f5;padding:20px;}
+body{font-family:'Noto Sans JP','Hiragino Kaku Gothic Pro',sans-serif;background:#f0f2f5;padding:10px;}
 @media print{body{padding:0;background:#fff;}}
-.wrap{width:285mm;margin:0 auto;background:#fff;border:2px solid #333;border-radius:4px;overflow:hidden;}
-.main-title{background:#1a1a2e;color:#fff;text-align:center;padding:16px;font-size:18px;font-weight:900;letter-spacing:3px;}
-.sub-title{background:#16213e;color:#ccc;text-align:center;padding:8px;font-size:11px;letter-spacing:2px;}
+.wrap{width:281mm;margin:0 auto;background:#fff;border:2px solid #333;border-radius:4px;overflow:hidden;}
+.main-title{background:#1a1a2e;color:#fff;text-align:center;padding:10px;font-size:15px;font-weight:900;letter-spacing:2px;}
+.sub-title{background:#16213e;color:#ccc;text-align:center;padding:5px;font-size:10px;letter-spacing:1px;}
 
-/* ヘッダー行 */
 table{width:100%;border-collapse:collapse;}
-th,td{border:1px solid #bbb;vertical-align:middle;padding:6px 8px;}
-.row-label{background:#1a1a2e;color:#fff;font-size:12px;font-weight:700;text-align:center;width:110px;line-height:1.5;}
-.year-header{background:#0f3460;color:#fff;text-align:center;font-size:14px;font-weight:900;padding:10px 4px;width:180px;}
+th,td{border:1px solid #bbb;vertical-align:middle;padding:4px 6px;}
+.row-label{background:#1a1a2e;color:#fff;font-size:10px;font-weight:700;text-align:center;width:86px;line-height:1.5;}
+.year-header{background:#0f3460;color:#fff;text-align:center;font-size:13px;font-weight:900;padding:8px 4px;}
 .year-header.now{background:#e94560;}
-.year-header.future{background:#374151;}
-.phase-cell{text-align:center;font-size:10px;font-weight:700;padding:6px 4px;background:#e8eaf0;color:#374151;letter-spacing:1px;}
+.phase-cell{text-align:center;font-size:10px;font-weight:700;padding:5px 4px;letter-spacing:1px;}
 .phase-cell.p1{background:#fde8ec;color:#e94560;}
 .phase-cell.p2{background:#e8f4fd;color:#0f3460;}
-.phase-cell.p3{background:#e8fdf0;color:#10b981;}
-.phase-cell.p4{background:#fdf6e8;color:#f59e0b;}
 
-/* 矢印セル */
-.arrow-wrap{padding:10px 8px;position:relative;}
-.arrow{display:flex;align-items:center;margin:4px 0;position:relative;}
-.arrow-body{height:28px;display:flex;align-items:center;padding:0 10px;font-size:10px;font-weight:700;color:#fff;position:relative;flex:1;}
-.arrow-body::after{content:'';position:absolute;right:-14px;top:0;border-left:14px solid;border-top:14px solid transparent;border-bottom:14px solid transparent;z-index:1;}
+.arrow-wrap{padding:6px 6px 6px 8px;}
+.arrow{display:flex;align-items:center;margin:3px 0;}
+.arrow-body{min-height:24px;display:flex;align-items:center;padding:0 8px;font-size:9px;font-weight:700;color:#fff;position:relative;flex:1;line-height:1.3;}
+.arrow-body::after{content:'';position:absolute;right:-12px;top:0;bottom:0;border-left:12px solid;border-top:12px solid transparent;border-bottom:12px solid transparent;}
 .a-red{background:#e94560;}.a-red::after{border-left-color:#e94560;}
 .a-blue{background:#0f3460;}.a-blue::after{border-left-color:#0f3460;}
 .a-green{background:#10b981;}.a-green::after{border-left-color:#10b981;}
-.a-orange{background:#f59e0b;}.a-orange::after{border-left-color:#f59e0b;}
 .a-purple{background:#7c3aed;}.a-purple::after{border-left-color:#7c3aed;}
 .a-teal{background:#0891b2;}.a-teal::after{border-left-color:#0891b2;}
-.a-gray{background:#6b7280;}.a-gray::after{border-left-color:#6b7280;}
 
-/* 続き矢印（矢尻なし） */
-.arrow-cont{height:28px;display:flex;align-items:center;padding:0 10px;font-size:10px;font-weight:700;color:#fff;flex:1;}
-
-/* スター・マイルストーン */
-.star{font-size:10px;color:#374151;margin:3px 0;line-height:1.5;}
+.star{font-size:9px;color:#374151;margin:2px 0;line-height:1.4;padding-left:2px;}
 .star::before{content:'★ ';color:#f59e0b;}
-.milestone{background:#1a1a2e;color:#fff;border-radius:3px;padding:3px 8px;font-size:10px;margin:3px 0;display:inline-block;}
 
-/* 売上行 */
-.sales-cell{text-align:center;padding:12px 6px;}
-.sales-num{font-size:22px;font-weight:900;color:#e94560;line-height:1;}
-.sales-sub{font-size:10px;color:#888;margin-top:2px;}
-.sales-goal{font-size:28px;font-weight:900;color:#e94560;}
+.sales-cell{text-align:center;padding:8px 4px;}
+.sales-num{font-size:20px;font-weight:900;color:#e94560;line-height:1;}
+.sales-sub{font-size:9px;color:#888;margin-top:2px;}
 
-/* 最終ゴール */
 .goal-row td{background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#fff;}
 .goal-label{color:#fff!important;}
-.goal-val{text-align:center;padding:14px 8px;}
-.goal-num{font-size:32px;font-weight:900;color:#fbbf24;line-height:1;}
-.goal-desc{font-size:11px;color:rgba(255,255,255,0.7);margin-top:4px;}
+.goal-val{text-align:center;padding:10px 8px;}
+.goal-num{font-size:26px;font-weight:900;color:#fbbf24;line-height:1;}
+.goal-desc{font-size:10px;color:rgba(255,255,255,0.7);margin-top:4px;}
 
-.footer{background:#1a1a2e;color:#888;text-align:center;padding:10px;font-size:10px;letter-spacing:1px;}
+.footer{background:#1a1a2e;color:#888;text-align:center;padding:7px;font-size:9px;letter-spacing:1px;}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="main-title">株式会社ライジング　事業ロードマップ 2026〜2028</div>
-  <div class="sub-title">Synup事業 × エステ・美容事業 × 2028年売上10億円への道筋</div>
+  <div class="sub-title">Synup事業 x エステ・美容事業 x 2028年売上10億円への道筋</div>
 
   <table>
-    <!-- 年ヘッダー -->
     <tr>
-      <th class="row-label">　</th>
-      <th class="year-header now">2026年度<br><span style="font-size:10px;font-weight:400">（現在）</span></th>
+      <th class="row-label"></th>
+      <th class="year-header now">2026年度<br><span style="font-size:9px;font-weight:400">（現在）</span></th>
       <th class="year-header" style="background:#c0392b;">2027年度</th>
-      <th class="year-header" style="background:#7c3aed;font-size:16px;">2028年度<br><span style="font-size:11px;font-weight:700;color:#fbbf24">🎯 売上10億円</span></th>
+      <th class="year-header" style="background:#7c3aed;">2028年度<br><span style="font-size:10px;font-weight:700;color:#fbbf24">&#9672; 売上10億円</span></th>
     </tr>
 
-    <!-- フェーズ -->
     <tr>
       <td class="row-label">事業フェーズ</td>
-      <td class="phase-cell p1">▶ 基盤構築期</td>
-      <td class="phase-cell p2">▶ 拡大期</td>
-      <td class="phase-cell" style="background:#ede9fe;color:#7c3aed;font-weight:900;">🚀 スケール・10億達成</td>
+      <td class="phase-cell p1">&#9654; 基盤構築期</td>
+      <td class="phase-cell p2">&#9654; 拡大期</td>
+      <td class="phase-cell" style="background:#ede9fe;color:#7c3aed;font-weight:900;">&#9650; スケール・10億達成</td>
     </tr>
 
-    <!-- Synup MEO/AI事業 -->
     <tr>
       <td class="row-label">Synup事業<br>MEO/AI集客</td>
       <td class="arrow-wrap">
-        <div class="arrow"><div class="arrow-body a-red">メール配信システム構築<br>初期クライアント獲得</div></div>
+        <div class="arrow"><div class="arrow-body a-red">メール配信構築・初期クライアント獲得</div></div>
         <div class="star">配信5,000件/日体制</div>
         <div class="star">レポート自動生成AI</div>
         <div class="star">Google Places API計測</div>
@@ -107,28 +89,26 @@ th,td{border:1px solid #bbb;vertical-align:middle;padding:6px 8px;}
       </td>
     </tr>
 
-    <!-- エステ・美容事業 -->
     <tr>
       <td class="row-label">エステ・<br>美容事業<br>（インディバ）</td>
       <td class="arrow-wrap">
-        <div style="color:#aaa;font-size:11px;text-align:center;padding:10px 0;">― 参入準備期 ―<br><span style="font-size:10px;">市場調査・物件選定<br>スタッフ採用準備</span></div>
+        <div style="color:#aaa;font-size:10px;text-align:center;padding:8px 0;">― 参入準備期 ―<br><span style="font-size:9px;">市場調査・物件選定<br>スタッフ採用準備</span></div>
       </td>
       <td class="arrow-wrap">
         <div class="arrow"><div class="arrow-body a-purple">インディバサロン　OPEN</div></div>
-        <div class="star" style="color:#7c3aed;font-weight:700;">★★ 2027年　グランドオープン</div>
+        <div class="star" style="color:#7c3aed;font-weight:700;">2027年　グランドオープン</div>
         <div class="star">インディバ施術導入</div>
-        <div class="star">Synup×MEOで集客</div>
+        <div class="star">Synup x MEOで集客</div>
         <div class="star">会員制プラン展開</div>
       </td>
       <td class="arrow-wrap">
         <div class="arrow"><div class="arrow-body a-purple">多店舗展開・FC全国10店舗</div></div>
-        <div class="star">美容×AI集客の先駆者へ</div>
+        <div class="star">美容 x AI集客の先駆者へ</div>
         <div class="star">インディバブランド確立</div>
         <div class="star">美容業界向けSynup特化プラン</div>
       </td>
     </tr>
 
-    <!-- テクノロジー基盤 -->
     <tr>
       <td class="row-label">テクノロジー<br>基盤</td>
       <td class="arrow-wrap">
@@ -149,34 +129,32 @@ th,td{border:1px solid #bbb;vertical-align:middle;padding:6px 8px;}
       </td>
     </tr>
 
-    <!-- 売上目標 -->
     <tr>
       <td class="row-label">売上目標</td>
       <td class="sales-cell">
-        <div class="sales-num">〜1,000<span style="font-size:14px">万円</span></div>
+        <div class="sales-num">〜1,000<span style="font-size:12px">万円</span></div>
         <div class="sales-sub">初年度 基盤構築</div>
       </td>
       <td class="sales-cell">
-        <div class="sales-num" style="color:#c0392b;">5,000<span style="font-size:14px">万円</span></div>
+        <div class="sales-num" style="color:#c0392b;">5,000<span style="font-size:12px">万円</span></div>
         <div class="sales-sub">Synup＋サロン合算</div>
       </td>
       <td class="sales-cell" style="background:#ede9fe;">
-        <div class="sales-goal" style="color:#7c3aed;font-size:40px;">10<span style="font-size:20px">億円</span></div>
-        <div class="sales-sub" style="color:#7c3aed;font-weight:700;">🎯 2028年 達成目標</div>
+        <div class="sales-num" style="color:#7c3aed;font-size:36px;">10<span style="font-size:18px">億円</span></div>
+        <div class="sales-sub" style="color:#7c3aed;font-weight:700;">2028年 達成目標</div>
       </td>
     </tr>
 
-    <!-- 最終ゴール -->
     <tr class="goal-row">
       <td class="row-label goal-label">ビジョン</td>
-      <td colspan="4" class="goal-val">
+      <td colspan="3" class="goal-val">
         <div class="goal-num">売上10億円企業へ</div>
-        <div class="goal-desc">AI集客支援（Synup事業）× エステ・美容（インディバ）のデュアルエンジンで日本一のローカルAIマーケティング企業を目指す</div>
+        <div class="goal-desc">AI集客支援（Synup事業）x エステ・美容（インディバ）のデュアルエンジンで日本一のローカルAIマーケティング企業を目指す</div>
       </td>
     </tr>
   </table>
 
-  <div class="footer">株式会社ライジング　Synup事業部　2026年4月作成｜目標：2028年売上10億円達成</div>
+  <div class="footer">株式会社ライジング　Synup事業部　2026年4月作成 | 目標：2028年売上10億円達成</div>
 </div>
 </body>
 </html>
