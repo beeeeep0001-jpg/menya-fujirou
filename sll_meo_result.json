@@ -1,0 +1,53 @@
+{
+  "store": "SLL Urban Suites Ebisu",
+  "area": "恵比寿",
+  "biz_type": "ホテル",
+  "location": {
+    "lat": 35.6467,
+    "lng": 139.7102,
+    "radius": 800
+  },
+  "rankings": [
+    {
+      "keyword": "恵比寿 ホテル おすすめ",
+      "rank": "9",
+      "total": 20
+    },
+    {
+      "keyword": "恵比寿 アパートホテル",
+      "rank": "7",
+      "total": 20
+    },
+    {
+      "keyword": "恵比寿 サービスアパートメント",
+      "rank": "21位以下",
+      "total": 1
+    },
+    {
+      "keyword": "恵比寿 長期滞在 ホテル",
+      "rank": "6",
+      "total": 20
+    },
+    {
+      "keyword": "恵比寿 家族 宿泊",
+      "rank": "1",
+      "total": 20
+    },
+    {
+      "keyword": "恵比寿 ホテル 格安",
+      "rank": "21位以下",
+      "total": 20
+    },
+    {
+      "keyword": "渋谷 ホテル おすすめ",
+      "rank": "21位以下",
+      "total": 20
+    }
+  ],
+  "summary": {
+    "best_rank": 1,
+    "worst_rank": 9,
+    "top3_count": 1,
+    "top10_count": 4
+  }
+}
