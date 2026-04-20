@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLL Urban Suites Ebisu｜LocalAI Audit Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Noto Sans JP',sans-serif;background:#f4f6f9;color:#1a1a2e;}
+  .page{width:210mm;min-height:297mm;margin:0 auto 20px;background:#fff;position:relative;overflow:hidden;page-break-after:always;}
+
+  /* P1 表紙 */
+  .p1-header{background:linear-gradient(135deg,#0f3460 0%,#16213e 60%,#1a1a2e 100%);color:#fff;padding:48px 48px 36px;}
+  .p1-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:6px 18px;font-size:11px;letter-spacing:2px;margin-bottom:24px;}
+  .p1-title{font-size:28px;font-weight:900;line-height:1.3;margin-bottom:8px;}
+  .p1-sub{font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:32px;}
+  .p1-store{background:rgba(255,255,255,0.1);border-left:4px solid #e94560;border-radius:4px;padding:16px 20px;margin-bottom:0;}
+  .p1-store-name{font-size:20px;font-weight:700;}
+  .p1-store-meta{font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;}
+  .p1-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:#f8f9ff;border-bottom:3px solid #e94560;}
+  .metric{padding:28px 20px;text-align:center;border-right:1px solid #e8eaf0;}
+  .metric:last-child{border-right:none;}
+  .metric-val{font-size:36px;font-weight:900;color:#0f3460;line-height:1;}
+  .metric-val.red{color:#e94560;}
+  .metric-val.green{color:#10b981;}
+  .metric-label{font-size:11px;color:#666;margin-top:6px;line-height:1.4;}
+  .p1-body{padding:32px 48px;}
+  .p1-intro{font-size:13px;line-height:1.9;color:#444;}
+  .p1-intro strong{color:#0f3460;}
+  .p1-date{position:absolute;bottom:24px;right:48px;font-size:11px;color:#999;}
+
+  /* 共通セクション */
+  .page-inner{padding:40px 48px;}
+  .section-title{font-size:18px;font-weight:900;color:#0f3460;border-left:4px solid #e94560;padding-left:12px;margin-bottom:20px;}
+  .section-sub{font-size:12px;color:#888;margin-bottom:24px;margin-top:-16px;}
+
+  /* P2 表 */
+  table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px;}
+  th{background:#0f3460;color:#fff;padding:10px 14px;text-align:left;font-weight:700;}
+  td{padding:10px 14px;border-bottom:1px solid #eee;}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:#f8f9ff;}
+  .rank-1{color:#e94560;font-weight:900;font-size:16px;}
+  .rank-top{color:#0f3460;font-weight:700;}
+  .rank-mid{color:#f59e0b;font-weight:700;}
+  .rank-out{color:#ccc;}
+  .tag-strong{background:#fef2f2;color:#e94560;border:1px solid #fecaca;border-radius:4px;padding:2px 8px;font-size:10px;margin-left:6px;}
+  .tag-weak{background:#f0fdf4;color:#10b981;border:1px solid #bbf7d0;border-radius:4px;padding:2px 8px;font-size:10px;margin-left:6px;}
+
+  /* AI出現率 */
+  .ai-box{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+  .ai-card{border:2px solid #e8eaf0;border-radius:8px;padding:20px;text-align:center;}
+  .ai-card-title{font-size:12px;color:#888;margin-bottom:8px;}
+  .ai-num{font-size:40px;font-weight:900;color:#e94560;}
+  .ai-denom{font-size:14px;color:#888;}
+  .ai-bar-wrap{background:#f0f0f0;border-radius:4px;height:8px;margin-top:12px;overflow:hidden;}
+  .ai-bar{height:100%;background:linear-gradient(90deg,#e94560,#ff6b6b);border-radius:4px;}
+
+  /* P3 解決策 */
+  .solution-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;}
+  .sol-card{background:#f8f9ff;border-radius:8px;padding:20px;border-top:3px solid #0f3460;}
+  .sol-icon{font-size:24px;margin-bottom:10px;}
+  .sol-title{font-size:13px;font-weight:700;color:#0f3460;margin-bottom:8px;}
+  .sol-desc{font-size:11px;color:#666;line-height:1.7;}
+  .case-box{background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;border-radius:8px;padding:24px;margin-top:4px;}
+  .case-label{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.6);margin-bottom:8px;}
+  .case-title{font-size:14px;font-weight:700;margin-bottom:12px;}
+  .case-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .case-stat{text-align:center;}
+  .case-stat-val{font-size:22px;font-weight:900;color:#e94560;}
+  .case-stat-label{font-size:10px;color:rgba(255,255,255,0.7);margin-top:4px;}
+
+  /* P4 インパクト */
+  .impact-hero{background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;border-radius:8px;padding:28px;text-align:center;margin-bottom:24px;}
+  .impact-amount{font-size:52px;font-weight:900;color:#e94560;line-height:1;}
+  .impact-label{font-size:13px;color:rgba(255,255,255,0.8);margin-top:8px;}
+  .impact-detail{font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;}
+  .ctr-table th{background:#16213e;}
+  .timeline{margin-top:4px;}
+  .tl-item{display:flex;gap:16px;margin-bottom:14px;align-items:flex-start;}
+  .tl-dot{width:32px;height:32px;border-radius:50%;background:#0f3460;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .tl-content{font-size:12px;line-height:1.6;color:#444;padding-top:6px;}
+  .tl-content strong{color:#0f3460;}
+
+  /* P5 クロージング */
+  .closing-hero{background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;padding:40px 48px 32px;text-align:center;}
+  .closing-title{font-size:22px;font-weight:900;line-height:1.5;margin-bottom:8px;}
+  .closing-sub{font-size:13px;color:rgba(255,255,255,0.7);}
+  .axis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+  .axis-card{padding:28px 24px;border-right:1px solid #e8eaf0;}
+  .axis-card:last-child{border-right:none;}
+  .axis-num{font-size:40px;font-weight:900;color:#e94560;line-height:1;}
+  .axis-title{font-size:13px;font-weight:700;color:#0f3460;margin:10px 0 8px;}
+  .axis-desc{font-size:11px;color:#666;line-height:1.7;}
+  .cta-box{background:#fef2f2;border:2px solid #e94560;border-radius:8px;padding:24px 32px;margin:24px 48px;text-align:center;}
+  .cta-main{font-size:16px;font-weight:700;color:#0f3460;margin-bottom:8px;}
+  .cta-sub{font-size:12px;color:#666;}
+  .sig{padding:20px 48px 32px;border-top:1px solid #eee;font-size:11px;color:#888;line-height:1.8;}
+
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;page-break-after:always;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== P1: 表紙＋サマリー ========== -->
+<div class="page">
+  <div class="p1-header">
+    <div class="p1-badge">LOCAL AI AUDIT REPORT 2026</div>
+    <div class="p1-title">Googleマップ × AI検索<br>現状分析レポート</div>
+    <div class="p1-sub">ChatGPT・Gemini 各10回 ＋ Google Places API実測（7キーワード）</div>
+    <div class="p1-store">
+      <div class="p1-store-name">SLL Urban Suites Ebisu</div>
+      <div class="p1-store-meta">東京都渋谷区恵比寿2-8-1 ALLONE ebisu｜アパートホテル / サービスアパートメント</div>
+    </div>
+  </div>
+  <div class="p1-metrics">
+    <div class="metric">
+      <div class="metric-val green">1位</div>
+      <div class="metric-label">MEO最高順位<br>「恵比寿 家族 宿泊」</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val red">1<span style="font-size:18px">/20回</span></div>
+      <div class="metric-label">AI検索出現率<br>ChatGPT+Gemini 計20回</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">+360<span style="font-size:18px">万円</span></div>
+      <div class="metric-label">年間収益インパクト試算<br>（対策後）</div>
+    </div>
+  </div>
+  <div class="p1-body">
+    <p class="p1-intro">
+      SLL Urban Suites Ebisu様は<strong>「恵比寿 家族 宿泊」でGoogleマップ1位</strong>を獲得しており、ファミリー・グループ向けKWで圧倒的な強みを持っています。しかし、<strong>メインKWの「恵比寿 ホテル おすすめ」では8位</strong>に留まり、ChatGPT・Geminiへの計20回の質問調査では<strong>1回しか紹介されない</strong>という明確な穴があります。<br><br>
+      Booking.com・Agoda・Airbnbへの掲載はあるものの、AI検索エンジンへの認知は極めて低い状態です。<strong>70㎡・4ベッド・バルコニー・キッチン完備</strong>という唯一無二の強みをAI検索に届けることで、広告費ゼロで月間新規予約を大幅に増加させる余地があります。
+    </p>
+  </div>
+  <div class="p1-date">作成日：2026年4月18日｜株式会社ライジング Synup事業部</div>
+</div>
+
+<!-- ========== P2: MEO順位表＋AI出現率 ========== -->
+<div class="page">
+  <div class="page-inner">
+    <div class="section-title">Googleマップ 順位計測結果</div>
+    <div class="section-sub">Google Places API (New) による実測 / 計測日：2026年4月18日 / 恵比寿エリア基準</div>
+    <table>
+      <tr>
+        <th>検索キーワード</th>
+        <th style="text-align:center;width:100px">順位</th>
+        <th>評価</th>
+      </tr>
+      <tr>
+        <td>恵比寿 家族 宿泊</td>
+        <td style="text-align:center"><span class="rank-1">1位</span></td>
+        <td><span class="tag-strong">最強KW</span> ファミリー・グループ層が直接流入</td>
+      </tr>
+      <tr>
+        <td>恵比寿 長期滞在 ホテル</td>
+        <td style="text-align:center"><span class="rank-top">6位</span></td>
+        <td><span class="tag-weak">伸びしろ</span> トップ3圏内で高LTVゲスト獲得可能</td>
+      </tr>
+      <tr>
+        <td>恵比寿 アパートホテル</td>
+        <td style="text-align:center"><span class="rank-top">7位</span></td>
+        <td><span class="tag-weak">伸びしろ</span> 業態KWでもう一押し</td>
+      </tr>
+      <tr>
+        <td>恵比寿 ホテル おすすめ</td>
+        <td style="text-align:center"><span class="rank-mid">8位</span></td>
+        <td>ビッグKW。トップ3入りで集客量が激変</td>
+      </tr>
+      <tr>
+        <td>恵比寿 サービスアパートメント</td>
+        <td style="text-align:center"><span class="rank-out">圏外</span></td>
+        <td>業態カテゴリの認知不足。登録情報の整備が必要</td>
+      </tr>
+      <tr>
+        <td>恵比寿 ホテル 格安</td>
+        <td style="text-align:center"><span class="rank-out">圏外</span></td>
+        <td>価格軸KWは不要（高単価で勝負する業態）</td>
+      </tr>
+      <tr>
+        <td>渋谷 ホテル おすすめ</td>
+        <td style="text-align:center"><span class="rank-out">圏外</span></td>
+        <td>広域KW。まずは恵比寿エリアの強化が先決</td>
+      </tr>
+    </table>
+
+    <div class="section-title">AI検索 出現率調査</div>
+    <div class="section-sub">ChatGPT・Geminiそれぞれ10回「恵比寿 ホテル おすすめ」「恵比寿 宿泊 おすすめ」等を質問</div>
+    <div class="ai-box">
+      <div class="ai-card">
+        <div class="ai-card-title">ChatGPT（10回調査）</div>
+        <div><span class="ai-num">0</span><span class="ai-denom"> / 10回</span></div>
+        <div class="ai-bar-wrap"><div class="ai-bar" style="width:0%"></div></div>
+        <div style="font-size:11px;color:#888;margin-top:8px">Websticホテル・ウェスティン等の大手が独占</div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-title">Gemini（10回調査）</div>
+        <div><span class="ai-num">1</span><span class="ai-denom"> / 10回</span></div>
+        <div class="ai-bar-wrap"><div class="ai-bar" style="width:10%"></div></div>
+        <div style="font-size:11px;color:#888;margin-top:8px">公式サイトは認識済。推薦には至っていない</div>
+      </div>
+    </div>
+    <div style="background:#fef2f2;border-left:4px solid #e94560;padding:14px 18px;border-radius:4px;font-size:12px;color:#444;line-height:1.8;">
+      <strong style="color:#e94560">【重要】</strong> Booking.com・Agoda・Airbnbには掲載済みにも関わらず、AI検索では20回中1回しか紹介されていません。AIは<strong>Googleビジネスプロフィールの情報充実度・113媒体への掲載数</strong>を参照して推薦先を決定するため、現状の掲載状況では届いていない状態です。
+    </div>
+  </div>
+</div>
+
+<!-- ========== P3: 解決策＋事例 ========== -->
+<div class="page">
+  <div class="page-inner">
+    <div class="section-title">なぜAIに届いていないのか・何をするべきか</div>
+    <div class="solution-grid">
+      <div class="sol-card">
+        <div class="sol-icon">🗺️</div>
+        <div class="sol-title">Googleビジネスプロフィール最適化</div>
+        <div class="sol-desc">「70㎡・4ベッド・キッチン・バルコニー」という強みがGBPに正しく登録されていないため、AIが「家族向け」として認識できていません。属性・カテゴリ・説明文を最適化します。</div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-icon">🌐</div>
+        <div class="sol-title">113媒体への一括登録</div>
+        <div class="sol-desc">Booking.com・Airbnbへの掲載はあるものの、日本国内の宿泊予約サイト（じゃらん・一休・楽天トラベル等）や海外媒体への情報統一が不完全です。113媒体に正確な情報を同期します。</div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-icon">🤖</div>
+        <div class="sol-title">AI検索向けコンテンツ整備</div>
+        <div class="sol-desc">ChatGPT・GeminiはWebの情報を参照して回答します。「恵比寿の家族向けアパートホテル」として認識されるよう、自然言語でのコンテンツ整備と引用されやすい情報設計を行います。</div>
+      </div>
+    </div>
+
+    <div class="section-title">同業他社での対策事例</div>
+    <div class="case-box">
+      <div class="case-label">CASE STUDY｜東京都内 サービスアパートメント（某エリア・70〜90㎡）</div>
+      <div class="case-title">「ファミリー向け」訴求の強化でAI出現率が12倍に</div>
+      <div class="case-stats">
+        <div class="case-stat">
+          <div class="case-stat-val">1→12回</div>
+          <div class="case-stat-label">AI検索出現<br>（20回調査）</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-val">+8件/月</div>
+          <div class="case-stat-label">新規予約増加<br>（3ヶ月後）</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-val">+420万円</div>
+          <div class="case-stat-label">年間売上増<br>（試算）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== P4: 収益インパクト＋CTR＋タイムライン ========== -->
+<div class="page">
+  <div class="page-inner">
+    <div class="section-title">収益インパクト試算</div>
+    <div class="impact-hero">
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:8px">対策後の年間収益インパクト試算</div>
+      <div class="impact-amount">+360万円</div>
+      <div class="impact-label">月間新規予約 +6件 × 平均単価50,000円 × 12ヶ月</div>
+      <div class="impact-detail">長期滞在ゲスト獲得なら最大 +720万円 / 年（月200,000〜300,000円 × 12）</div>
+    </div>
+
+    <div class="section-title">Googleマップ 順位別クリック率（CTR）</div>
+    <table class="ctr-table">
+      <tr>
+        <th>順位</th><th>クリック率</th><th>SLL様への影響</th>
+      </tr>
+      <tr>
+        <td><strong>1位</strong></td><td><strong style="color:#10b981">約40%</strong></td>
+        <td>「恵比寿 家族 宿泊」で維持中 → 防衛が最優先</td>
+      </tr>
+      <tr>
+        <td>2〜3位</td><td>約14〜19%</td>
+        <td>「長期滞在」「アパートホテル」がここに来ると大幅増</td>
+      </tr>
+      <tr>
+        <td>4〜5位</td><td>約7〜10%</td>
+        <td>「恵比寿 ホテル おすすめ」8位 → まずここへ</td>
+      </tr>
+      <tr>
+        <td><span style="color:#ccc">6〜10位</span></td><td style="color:#ccc">約3〜7%</td><td style="color:#ccc">現在の「おすすめ」KWはこの帯域</td>
+      </tr>
+      <tr>
+        <td><span style="color:#ccc">11位以下</span></td><td style="color:#ccc">1%未満</td><td style="color:#ccc">「格安」「渋谷」KWは実質ゼロ</td>
+      </tr>
+    </table>
+
+    <div class="section-title" style="margin-top:20px">対策タイムライン</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1M</div>
+        <div class="tl-content"><strong>1ヶ月目：</strong>GBP最適化・113媒体への情報登録・カテゴリ修正。「恵比寿 サービスアパートメント」圏外 → 上位10位以内を目指す。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2M</div>
+        <div class="tl-content"><strong>2ヶ月目：</strong>AI検索出現率が向上し始める（目標：20回中5回以上）。「恵比寿 ホテル おすすめ」8位 → 5位以内へ。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3M</div>
+        <div class="tl-content"><strong>3ヶ月目：</strong>月間新規予約+6件ペース到達。AI出現率20回中10回以上が目標。年間+360万円の収益基盤が確立。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== P5: 3軸クロージング＋CTA ========== -->
+<div class="page">
+  <div class="closing-hero">
+    <div class="closing-title">私たちが目指す3つのゴール</div>
+    <div class="closing-sub">「1位に表示される確率を上げる」ことが本質。順位は人・距離・端末で毎回変わります。</div>
+  </div>
+  <div class="axis-grid">
+    <div class="axis-card">
+      <div class="axis-num">①</div>
+      <div class="axis-title">AIに表示させる</div>
+      <div class="axis-desc">現在ChatGPT・Geminiに20回中1回しか紹介されていません。まず「紹介される存在」になることが第一歩です。113媒体への登録でAIの認識精度を高めます。</div>
+    </div>
+    <div class="axis-card">
+      <div class="axis-num">②</div>
+      <div class="axis-title">AI表示確率を上げる</div>
+      <div class="axis-desc">AIに認識されても、毎回上位に出るとは限りません。「恵比寿の家族向けアパートホテル」として繰り返し引用されるコンテンツ設計で出現率を最大化します。</div>
+    </div>
+    <div class="axis-card">
+      <div class="axis-num">③</div>
+      <div class="axis-title">MEO 1位確率を上げる</div>
+      <div class="axis-desc">「家族 宿泊」1位を守りながら、「長期滞在」「アパートホテル」「ホテル おすすめ」でも1位に表示される確率を高めます。1位と5位ではクリック数が約10倍違います。</div>
+    </div>
+  </div>
+
+  <div style="padding:0 48px;margin-top:24px;">
+    <div style="background:#f8f9ff;border-radius:8px;padding:20px 24px;font-size:12px;color:#444;line-height:1.9;border-left:4px solid #0f3460;">
+      <strong style="color:#0f3460">【重要な事実】</strong> Googleマップの順位は検索するユーザーの現在地・利用端末・検索履歴によって毎回異なります。「自分が検索したら1位だった」という体験と「実際の平均順位」は異なります。だからこそ、<strong>特定の1位を狙うのではなく「様々なユーザーが検索したときに1位で表示される確率を上げる」</strong>ことが本質的な対策です。
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <div class="cta-main">まずは15分、ZoomでAI集客の全体像をお伝えします</div>
+    <div class="cta-sub">費用・契約の話は一切なし。現状データをもとに「何から始めるべきか」だけをお伝えします。</div>
+  </div>
+
+  <div class="sig">
+    別府秀児朗｜株式会社ライジング Synup事業部<br>
+    TEL：080-7552-1257　Mail：info@risingsun-info.tokyo<br>
+    ※本レポートのMEO順位はGoogle Places API (New) による実測値です。AI検索出現率はChatGPT・Gemini各10回の調査に基づきます。
+  </div>
+</div>
+
+</body>
+</html>

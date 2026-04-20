@@ -1,5 +1,4 @@
 .env
-*.pdf
 __pycache__/
 *.pyc
 meo_result_*.json
